@@ -13,11 +13,11 @@ namespace UI_MVC3.Controllers
             // Hier wordt voorlopig gewoon wat testdata doorgegeven aan de 'Managers'
             dMgr = new DataManager();
             gMgr = new GebruikerManager();
-
-            dMgr.AddMessages($"c:\\Users\\Nathan\\documents\\visual studio 2015\\Projects\\IP3_8IEN\\BL\\textgaindump.json");
-            gMgr.AddGebruikers($"c:\\Users\\Nathan\\documents\\visual studio 2015\\Projects\\IP3_8IEN\\BL\\AddGebruikersInit.Json");
-            gMgr.AddAlertInstelling($"c:\\Users\\Nathan\\documents\\visual studio 2015\\Projects\\IP3_8IEN\\BL\\AddAlertInstelling.json");
-            gMgr.AddAlerts($"c:\\Users\\Nathan\\documents\\visual studio 2015\\Projects\\IP3_8IEN\\BL\\AddAlerts.json");
+            
+            dMgr.AddMessages($"c:\\textgaindump.json");
+            gMgr.AddGebruikers($"c:\\AddGebruikersInit.Json");
+            gMgr.AddAlertInstelling($"c:\\AddAlertInstelling.json");
+            gMgr.AddAlerts($"c:\\AddAlerts.json");
         }
 
         public ActionResult Index()
