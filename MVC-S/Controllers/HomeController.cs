@@ -18,6 +18,7 @@ namespace MVC_S.Controllers
             gMgr.AddGebruikers($"c:\\AddGebruikersInit.Json");
             gMgr.AddAlertInstelling($"c:\\AddAlertInstelling.json");
             gMgr.AddAlerts($"c:\\AddAlerts.json");
+            //gMgr.AddAlerts($"c:\\Users\\Nathan\\Desktop\\IP3_8IEN\\BL\\AddAlerts.json");
         }
 
         public ActionResult Index()

@@ -18,5 +18,8 @@ namespace IP3_8IEN.BL
 
         //30 mrt 2018 : Stephane
         IEnumerable<Onderwerp> ReadOnderwerpen();
+
+        //31 mrt 2018 : Stephane
+        void initNonExistingRepo(bool withUnitOfWork);
     }
 }

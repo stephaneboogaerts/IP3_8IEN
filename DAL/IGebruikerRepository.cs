@@ -17,5 +17,8 @@ namespace IP3_8IEN.DAL
         void UpdateAlertInstelling(AlertInstelling alertInstelling);
         bool isUnitofWork();
         void setUnitofWork(bool UoW);
+
+        //2 apr 2018 : Stephane
+        IEnumerable<Alert> ReadAlerts();
     }
 }

@@ -179,7 +179,12 @@ namespace IP3_8IEN.BL
             };
         }
 
-        
+        public IEnumerable<Alert> GetAlerts()
+        {
+            initNonExistingRepo();
+            return repo.ReadAlerts();
+        }
+
         //Unit of Work related
         public void initNonExistingRepo(bool withUnitOfWork = false)
         {
