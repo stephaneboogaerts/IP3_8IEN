@@ -69,5 +69,20 @@ namespace IP3_8IEN.DAL
             //Onderwerp onderwerp = ctx.Onderwerpen.Find(onderwerpId);
             return ctx.Onderwerpen;
         }
+
+        public IEnumerable<Organisatie> ReadOrganisaties()
+        {
+            return ctx.Organisaties.ToList<Organisatie>();
+        }
+
+        public void AddingTewerkstelling(Tewerkstelling tewerkstelling)
+        {
+            ctx.Tewerkstellingen.Add(tewerkstelling);
+            ctx.SaveChanges();
+        }
+        public void UdateOnderwerp(Onderwerp onderwerp)
+        {
+            ctx.SaveChanges();
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace IP3_8IEN.BL
 {
     public class DataManager : IDataManager
     {
+        //1 apr 2018 : Stephane
+
         private UnitOfWorkManager uowManager;
         private IMessageRepository repo;//= new MessageRepository();
 
@@ -211,6 +213,113 @@ namespace IP3_8IEN.BL
             IEnumerable<Onderwerp> onderwerpen = repo.ReadSubjects();
             return onderwerpen;
         }
+
+        public void AddOrganisation(string naamOrganisatie)
+        {
+            initNonExistingRepo();
+
+            Organisatie organisatie;
+            IEnumerable<Organisatie> organisaties = repo.ReadOrganisaties();
+
+            bool ifExists = organisaties.Any(x => x.NaamOrganisatie == naamOrganisatie);
+
+            if (ifExists == true)
+            {
+                organisatie = organisaties.FirstOrDefault(x => x.NaamOrganisatie == naamOrganisatie);
+            }
+            else
+            {
+                organisatie = new Organisatie()
+                {
+                    NaamOrganisatie = naamOrganisatie,
+                    Tewerkstellingen = new Collection<Tewerkstelling>()
+                };
+                repo.AddOnderwerp(organisatie);
+            }
+        }
+
+        public void AddOrganisations(string filePath)
+        {
+            initNonExistingRepo();
+
+            // Json /CSV
+        }
+
+        public void AddTewerkstelling(string voornaam, string achternaam, string naamOrganisatie)
+        {
+            initNonExistingRepo();
+
+            Persoon persoon;
+            Organisatie organisatie;
+
+            IEnumerable<Persoon> personen = repo.ReadPersonen();
+            IEnumerable<Organisatie> organisaties = repo.ReadOrganisaties();
+
+
+            bool ifExistsP = personen.Any(x => x.Voornaam == voornaam
+                  && x.Achternaam == achternaam);
+            bool ifExistsO = organisaties.Any(x => x.NaamOrganisatie == naamOrganisatie);
+
+            if (ifExistsP)
+            {
+                persoon = personen.FirstOrDefault(x => x.Voornaam == voornaam
+                  && x.Achternaam == achternaam);
+            } else
+            {
+                throw new ArgumentException("Persoon '" + voornaam + " " + achternaam + "' not found!");
+            }
+            if (ifExistsO)
+            {
+                organisatie = organisaties.FirstOrDefault(x => x.NaamOrganisatie == naamOrganisatie);
+            } else
+            {
+                throw new ArgumentException("Organisatie '" + naamOrganisatie + "' not found!");
+            }
+
+            Tewerkstelling tewerkstelling = new Tewerkstelling()
+            {
+                Persoon = persoon,
+                Organisatie = organisatie
+            };
+
+            //Tewerkstelling toevoegen aan de ICollection van 'Persoon'
+            var persoonColl = persoon.Tewerkstellingen;
+            if (persoonColl != null)
+            {
+                persoon.Tewerkstellingen = persoonColl.ToList();
+            }
+            else
+            {
+                persoon.Tewerkstellingen = new Collection<Tewerkstelling>();
+            }
+
+            persoon.Tewerkstellingen.Add(tewerkstelling);
+
+            //Tewerkstelling toevoegen aan de ICollection van 'Organisatie'
+            var organisatieColl = organisatie.Tewerkstellingen;
+            if (organisatieColl != null)
+            {
+                organisatie.Tewerkstellingen = organisatieColl.ToList();
+            }
+            else
+            {
+                organisatie.Tewerkstellingen = new Collection<Tewerkstelling>();
+            }
+
+            organisatie.Tewerkstellingen.Add(tewerkstelling);
+
+            //eerst tewerkstelling creëren zodat deze een PK toegewegen krijgt
+            repo.AddingTewerkstelling(tewerkstelling);
+            //dan de persoon & organisatie updaten met de nieuwe 'tewerkstelling'
+            repo.UdateOnderwerp(persoon);
+            //repo.UdateOnderwerp(organisatie);
+        }
+
+        public void AddTewerkstelling(Persoon persoon, Organisatie Organisatie)
+        {
+
+        }
+
 
         //Unit of Work related
         public void initNonExistingRepo(bool withUnitOfWork = false)

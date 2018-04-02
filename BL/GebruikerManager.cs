@@ -123,14 +123,32 @@ namespace IP3_8IEN.BL
         // 'AlertContent' kan een string zijn met informatie om te verzenden naar een gebruiker
         public void AddAlert(string alertContent, int alertInstellingId)
         {
+            initNonExistingRepo();
+
             AlertInstelling alertInstelling = repo.ReadAlertInstelling(alertInstellingId);
             Alert alert = new Alert()
             {
                 AlertContent = alertContent,
                 AlertInstelling = alertInstelling,
-                CreatedOn = DateTime.Now                
+                CreatedOn = DateTime.Now
             };
+            //alert toevoegen aan de ICollection van 'AlertInstelling'
+            var alertColl = alertInstelling.alerts;
+            if (alertColl != null)
+            {
+                alertInstelling.alerts = alertColl.ToList();
+            }
+            else
+            {
+                alertInstelling.alerts = new Collection<Alert>();
+            }
+
+            alertInstelling.alerts.Add(alert);
+
+            //eerst alert creëren zodat deze een PK toegewegen krijgt
             repo.AddingAlert(alert);
+            //dan de AlertInstelling updaten met de nieuwe 'Alert'
+            repo.UpdateAlertInstelling(alertInstelling);
         }
         
         // Alerts inlezen via json bestand
@@ -151,31 +169,8 @@ namespace IP3_8IEN.BL
             {
                 alertContent = item.AlertContent;
                 alertInstellingId = item.AlertInstellingId;
-
-                // AddAlert() methode hierboven niet mogelijk door 'UoW'
-                AlertInstelling alertInstelling = repo.ReadAlertInstelling(alertInstellingId);
-                Alert alert = new Alert()
-                {
-                    AlertContent = alertContent,
-                    AlertInstelling = alertInstelling,
-                    CreatedOn = DateTime.Now
-                };
-                //alert toevoegen aan de ICollection van 'AlertInstelling'
-                var alertColl = alertInstelling.alerts;
-                if (alertColl != null)
-                {
-                    //alertInstelling.alerts = alertColl.ToList();
-                } else
-                {
-                    alertInstelling.alerts = new Collection<Alert>();
-                }
-
-                alertInstelling.alerts.Add(alert);
                 
-                //eerst alert creëren zodat deze een PK toegewegen krijgt
-                repo.AddingAlert(alert);
-                //dan de AlertInstelling updaten met de nieuwe 'Alert'
-                repo.UpdateAlertInstelling(alertInstelling);
+                AddAlert(alertContent, alertInstellingId);
             };
         }
 

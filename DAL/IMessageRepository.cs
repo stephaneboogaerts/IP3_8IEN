@@ -26,5 +26,9 @@ namespace IP3_8IEN.DAL
         bool isUnitofWork();
         void setUnitofWork(bool UoW);
 
+        //2 apr 2018 : Stephane
+        IEnumerable<Organisatie> ReadOrganisaties();
+        void AddingTewerkstelling(Tewerkstelling tewerkstelling);
+        void UdateOnderwerp(Onderwerp onderwerp);
     }
 }

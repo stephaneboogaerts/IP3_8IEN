@@ -14,5 +14,7 @@ namespace IP3_8IEN.BL.Domain.Data
         //Achternaam kan meerdere woorden bevatten vb: "van de .."
         public string Achternaam { get; set; }
         public string Voornaam { get; set; }
+
+        public ICollection<Tewerkstelling> Tewerkstellingen { get; set; }
     }
 }

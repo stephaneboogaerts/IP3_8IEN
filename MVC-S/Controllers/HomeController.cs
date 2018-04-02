@@ -15,10 +15,14 @@ namespace MVC_S.Controllers
             gMgr = new GebruikerManager();
 
             dMgr.AddMessages($"c:\\textgaindump.json");
+            dMgr.AddOrganisation("Groen");
+            dMgr.AddOrganisation("Groen");
+            dMgr.AddOrganisation("VLD");
+            dMgr.AddTewerkstelling("Imade", "Annouri",  "Groen");
+            dMgr.AddTewerkstelling("Annick", "De Ridder", "Groen");
             gMgr.AddGebruikers($"c:\\AddGebruikersInit.Json");
             gMgr.AddAlertInstelling($"c:\\AddAlertInstelling.json");
             gMgr.AddAlerts($"c:\\AddAlerts.json");
-            //gMgr.AddAlerts($"c:\\Users\\Nathan\\Desktop\\IP3_8IEN\\BL\\AddAlerts.json");
         }
 
         public ActionResult Index()

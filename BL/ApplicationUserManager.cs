@@ -13,6 +13,8 @@ namespace IP3_8IEN.BL
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+        //1 apr 2018 : Stephane
+
         public ApplicationUserManager()
             : base(new IdentityRepository())
         {

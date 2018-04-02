@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace IP3_8IEN.DAL
 {
+    //1 apr 2018 : Stephane
+
     // Dit stond in UI_MVC_S -> Bad Practice
     // Repositories horen thuis in DAL
     // IdentityRepository geeft toegang tot de Authenticatiegegevens in de DB

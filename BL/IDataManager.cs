@@ -21,5 +21,11 @@ namespace IP3_8IEN.BL
 
         //31 mrt 2018 : Stephane
         void initNonExistingRepo(bool withUnitOfWork);
+
+        //2 apr 2018 : Stephane
+        void AddOrganisation(string naamOrganisatie);
+        void AddOrganisations(string filePath);
+        void AddTewerkstelling(string voornaam, string achternaam, string organisatieNaam);
+        void AddTewerkstelling(Persoon persoon, Organisatie organisatie);
     }
 }

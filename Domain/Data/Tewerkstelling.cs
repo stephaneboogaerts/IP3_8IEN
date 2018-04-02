@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace IP3_8IEN.BL.Domain.Data
 {
-    class Tewerkstelling
+    public class Tewerkstelling
     {
         public int TewerkstellingId { get; set; }
+
+        public Persoon Persoon { get; set; }
+        public Organisatie Organisatie { get; set; }
     }
 }

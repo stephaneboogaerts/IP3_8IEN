@@ -30,6 +30,9 @@ namespace IP3_8IEN.DAL.EF
         public DbSet<AlertInstelling> AlertInstellingen { get; set; }
         //31 mrt 2018 : Stephane
         public DbSet<Alert> Alerts { get; set; }
+        //2 apr 2018 : Stephane
+        public DbSet<Organisatie> Organisaties { get; set; }
+        public DbSet<Tewerkstelling> Tewerkstellingen { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
