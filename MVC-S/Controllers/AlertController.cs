@@ -12,13 +12,14 @@ namespace MVC_S.Controllers
     {
         private IGebruikerManager mgr = new GebruikerManager();
 
+        // 2 apr 2018 : Stephane
         // GET: Alert
         public ActionResult Index()
         {
             IEnumerable<Alert> alerts = mgr.GetAlerts();
             return View(alerts);
         }
-
+        
         // GET: Alert/Details/5
         public ActionResult Details(int id)
         {

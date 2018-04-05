@@ -64,8 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationUserManager.cs" />
+    <Compile Include="DashManager.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="GebruikerManager.cs" />
+    <Compile Include="IDashManager.cs" />
     <Compile Include="IDataManager.cs" />
     <Compile Include="IGebruikerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

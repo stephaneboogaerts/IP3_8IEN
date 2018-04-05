@@ -2,6 +2,7 @@
 using IP3_8IEN.BL.Domain.Data;
 using IP3_8IEN.BL.Domain.Gebruikers;
 using System;
+using IP3_8IEN.BL.Domain.Dashboard;
 
 namespace IP3_8IEN.DAL.EF
 {
@@ -33,6 +34,11 @@ namespace IP3_8IEN.DAL.EF
         //2 apr 2018 : Stephane
         public DbSet<Organisatie> Organisaties { get; set; }
         public DbSet<Tewerkstelling> Tewerkstellingen { get; set; }
+        //5 apr 2018 : Stephane
+        public DbSet<DashItem> DashItems { get; set; }
+        public DbSet<Cijfer> Cijfers { get; set; }
+        public DbSet<Kruising> Kruisingen { get; set; }
+        public DbSet<Vergelijking> Vergelijkingen { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

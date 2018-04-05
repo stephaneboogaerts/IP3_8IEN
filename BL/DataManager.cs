@@ -252,14 +252,16 @@ namespace IP3_8IEN.BL
             Persoon persoon;
             Organisatie organisatie;
 
+            //lijst personen en organisaties opvragen
             IEnumerable<Persoon> personen = repo.ReadPersonen();
             IEnumerable<Organisatie> organisaties = repo.ReadOrganisaties();
 
-
+            //kijken of persoon en organisatie bestaan
             bool ifExistsP = personen.Any(x => x.Voornaam == voornaam
                   && x.Achternaam == achternaam);
             bool ifExistsO = organisaties.Any(x => x.NaamOrganisatie == naamOrganisatie);
 
+            //persoon & organisatie initialiseren
             if (ifExistsP)
             {
                 persoon = personen.FirstOrDefault(x => x.Voornaam == voornaam
@@ -276,6 +278,7 @@ namespace IP3_8IEN.BL
                 throw new ArgumentException("Organisatie '" + naamOrganisatie + "' not found!");
             }
 
+            //'Tewerkstelling' initialiseren
             Tewerkstelling tewerkstelling = new Tewerkstelling()
             {
                 Persoon = persoon,
@@ -310,14 +313,14 @@ namespace IP3_8IEN.BL
 
             //eerst tewerkstelling creëren zodat deze een PK toegewegen krijgt
             repo.AddingTewerkstelling(tewerkstelling);
-            //dan de persoon & organisatie updaten met de nieuwe 'tewerkstelling'
+            //dan de persoon & organisatie updaten met de nieuwe 'Tewerkstelling'
+            //Todo: misschien gewoon een UpdateContext maken
             repo.UdateOnderwerp(persoon);
-            //repo.UdateOnderwerp(organisatie);
         }
 
         public void AddTewerkstelling(Persoon persoon, Organisatie Organisatie)
         {
-
+            //Todo
         }
 
 

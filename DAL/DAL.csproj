@@ -62,11 +62,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DashRepository.cs" />
     <Compile Include="EF\ApplicationDbContext.cs" />
     <Compile Include="EF\OurDbConfiguration.cs" />
     <Compile Include="EF\OurDbContext.cs" />
     <Compile Include="EF\OurDbInitializer.cs" />
     <Compile Include="GebruikerRepository.cs" />
+    <Compile Include="IDashRepository.cs" />
     <Compile Include="IdentityRepository.cs" />
     <Compile Include="IGebruikerRepository.cs" />
     <Compile Include="IMessageRepository.cs" />
