@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
-using IP3_8IEN.BL;
+using IP_8IEN.BL;
+using System.IO;
+using System.Web;
 
 namespace MVC_S.Controllers
 {
@@ -10,19 +12,26 @@ namespace MVC_S.Controllers
 
         public HomeController()
         {
-            // Hier wordt voorlopig gewoon wat testdata doorgegeven aan de 'Managers'
+            // Hier wordt voorlopig wat testdata doorgegeven aan de 'Managers'
             dMgr = new DataManager();
             gMgr = new GebruikerManager();
 
-            dMgr.AddMessages($"c:\\textgaindump.json");
+            //-- Laat deze twee in commentaar staan --//
+            //dMgr.ApiRequestToJson();
+            //dMgr.AddMessages(@"C:\Users\Nathan\Desktop\api.json");
+            //--                                    --//
+
+            dMgr.AddMessages(Path.Combine(HttpRuntime.AppDomainAppPath, "textgaintest2.json"));
+
             dMgr.AddOrganisation("Groen");
             dMgr.AddOrganisation("Groen");
             dMgr.AddOrganisation("VLD");
-            dMgr.AddTewerkstelling("Imade", "Annouri",  "Groen");
-            dMgr.AddTewerkstelling("Annick", "De Ridder", "Groen");
-            gMgr.AddGebruikers($"c:\\AddGebruikersInit.Json");
-            gMgr.AddAlertInstelling($"c:\\AddAlertInstelling.json");
-            gMgr.AddAlerts($"c:\\AddAlerts.json");
+            dMgr.AddTewerkstelling("Pascal Smet", "Groen");
+            dMgr.AddTewerkstelling("Tom Van Grieken", "Groen");
+
+            gMgr.AddGebruikers(Path.Combine(HttpRuntime.AppDomainAppPath, "AddGebruikersInit.Json"));
+            gMgr.AddAlertInstelling(Path.Combine(HttpRuntime.AppDomainAppPath, "AddAlertInstelling.json"));
+            gMgr.AddAlerts(Path.Combine(HttpRuntime.AppDomainAppPath, "AddAlerts.json"));
         }
 
         public ActionResult Index()
